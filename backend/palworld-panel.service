@@ -1,0 +1,27 @@
+# /etc/systemd/system/palworld-panel.service
+#   sudo systemctl daemon-reload && sudo systemctl enable --now palworld-panel
+[Unit]
+Description=Palworld Panel API
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+# Must be a user in the `docker` group AND able to write the Config directory.
+User=palworld
+Group=palworld
+WorkingDirectory=/opt/palworld-panel/backend
+EnvironmentFile=/opt/palworld-panel/backend/.env
+ExecStart=/usr/bin/node src/server.js
+Restart=on-failure
+RestartSec=5
+
+# Hardening: the service only needs its own dir and the Palworld config dir.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/USER/palworld-server/data/Pal/Saved/Config/LinuxServer
+
+[Install]
+WantedBy=multi-user.target
