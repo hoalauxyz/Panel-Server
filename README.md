@@ -159,7 +159,7 @@ cảnh báo `beforeunload` khi còn thay đổi chưa lưu.
 
 - `npm test` trong `backend/` — 9/9 pass (comma trong tên server, escape dấu nháy,
   giữ key không quản lý, chặn range ngoài 0.5–3.0, chặn newline injection).
-  
+  s
 - Chạy thật API trên file `.ini` mẫu: `GET`/`PUT` đúng, backup được tạo,
   401 khi thiếu key, 422 khi `ExpRate=99`, và `/api/restart-server` trả lỗi có
   ngữ cảnh khi không tìm thấy `docker`.
